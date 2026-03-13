@@ -48,7 +48,7 @@ const renderIssues = issues => {
     });
 };
 
-// Tabs Filter toggle  functionalities
+// Tabs  toggle  functionalities
 tabs.forEach(btn => btn.onclick = () => {
     tabs.forEach(t => {
         t.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
