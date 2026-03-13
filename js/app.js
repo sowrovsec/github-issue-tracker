@@ -7,12 +7,25 @@ const issueCount = document.getElementById('issue-count');
 const tabs = document.querySelectorAll('.tab-btn');
 const spinner = document.getElementById('loading-spinner');
 
+// show spinner 
+const showloading = (isLoading) => {
+    if (isLoading) {
+        spinner.classList.remove('hidden');
+        issuesContainer.classList.add('hidden');
+    } else {
+        spinner.classList.add('hidden');
+        issuesContainer.classList.remove('hidden');
+    }
+};
+
+
 // Load Issues
 const loadIssues = async () => {
-    
+    showloading(true)
     const res = await fetch(`${API}/issues`);
     const data = await res.json();
     allIssues = data.data;
+    showloading(false)
     renderIssues(allIssues);
 };
 // display all issue 
@@ -121,10 +134,15 @@ document.getElementById('searchBtn').onclick = async () => {
         renderIssues(allIssues);
         return;
     }
+    
+    showloading(true)
 
     const res = await fetch(`${API}/issues/search?q=${searvalue}`);
     const data = await res.json();
     renderIssues(data.data);
+            showloading(false)
+
+
 };
 
 
