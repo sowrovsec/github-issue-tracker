@@ -113,4 +113,19 @@ const openModal = async issueSummary => {
     modal.showModal();
 };
 
+// Search functinalities
+document.getElementById('searchBtn').onclick = async () => {
+    const searvalue = document.getElementById('searchInput').value;
+    
+    if (!searvalue) {
+        renderIssues(allIssues);
+        return;
+    }
+
+    const res = await fetch(`${API}/issues/search?q=${searvalue}`);
+    const data = await res.json();
+    renderIssues(data.data);
+};
+
+
 loadIssues();
