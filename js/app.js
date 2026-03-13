@@ -47,7 +47,7 @@ const renderIssues = issues => {
                     <img src="assets/${isOpen ? 'Open' : 'Closed'}-Status.png" class="w-4 h-4" alt="${issue.status}">
                     <span class="badge ${issue.priority.toLowerCase() === 'high' ? 'badge-error' : 'badge-warning'} badge-sm font-bold">${issue.priority.toUpperCase()}</span>
                 </div>
-                <h2 class="card-title text-lg font-bold line-clamp-2">${issue.title}</h2>
+                <h2 class="card-title text-lg text-blue-900 font-bold line-clamp-2">${issue.title}</h2>
                 <p class="text-sm text-gray-600 line-clamp-2 my-2 flex-grow">${issue.description}</p>
                 <div class="flex gap-2 mb-4 flex-wrap">${labels}</div>
                 <div class="flex justify-between items-center mt-auto border-t pt-3">
