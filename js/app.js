@@ -43,7 +43,7 @@ const renderIssues = issues => {
                 </div>
             </div>
         `;
-       
+        card.onclick = () => openModal(issue);
         issuesContainer.appendChild(card);
     });
 };
@@ -61,3 +61,56 @@ tabs.forEach(btn => btn.onclick = () => {
     const status = btn.dataset.status.toLowerCase();
     renderIssues(status === 'all' ? allIssues : allIssues.filter(i => i.status.toLowerCase() === status));
 });
+
+// Modal functinalities
+const openModal = async issueSummary => {
+    const modal = document.getElementById('issue_modal');
+    const modalContent = document.getElementById('modal-content');
+
+    const res = await fetch(`${API}/issue/${issueSummary.id}`);
+    const fullIssue = (await res.json()).data;
+
+    const isOpen = fullIssue.status.toLowerCase() === 'open';
+    const statusBg = isOpen ? 'bg-emerald-500' : 'bg-purple-500';
+    const statusText = isOpen ? 'Opened' : 'Closed';
+    const priorityBadge = fullIssue.priority.toLowerCase() === 'high' ? 'bg-red-500 text-white' : 'bg-yellow-500 text-white';
+    const date = fullIssue.createdAt ? new Date(fullIssue.createdAt).toLocaleDateString() : new Date().toLocaleDateString();
+
+    const labelsHtml = fullIssue.labels.map(label => {
+        const isBug = label.toLowerCase() === 'bug';
+        return `<span class="flex items-center px-3 py-1 text-xs font-semibold rounded-full border ${isBug ? 'text-red-500 border-red-200 bg-red-50' : 'text-yellow-600 border-yellow-200 bg-yellow-50'} uppercase">${label}</span>`;
+    }).join('');
+
+    modalContent.innerHTML = `
+        <div class="mb-6">
+            <h3 class="font-bold text-2xl mb-3 text-slate-800">${fullIssue.title}</h3>
+            <div class="flex items-center text-sm text-gray-500 gap-2">
+                <span class="${statusBg} text-white px-3 py-0.5 rounded-full text-xs font-medium">${statusText}</span>
+                <span>•</span>
+                <span>Opened by ${fullIssue.author}</span>
+                <span>•</span>
+                <span>${date}</span>
+            </div>
+        </div>
+        <div class="flex gap-2 mb-6">${labelsHtml}</div>
+        <p class="text-gray-600 mb-8 text-sm leading-relaxed">${fullIssue.description}</p>
+        <div class="bg-slate-50 rounded-xl p-6 flex flex-col sm:flex-row gap-8 sm:gap-24 mb-6">
+            <div>
+                <p class="text-gray-500 text-sm mb-1">Assignee:</p>
+                <p class="font-bold text-slate-800">${fullIssue.assignee}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm mb-1">Priority:</p>
+                <span class="${priorityBadge} px-3 py-0.5 rounded-full text-xs font-medium uppercase">${fullIssue.priority}</span>
+            </div>
+        </div>
+        <div class="flex justify-end mt-6">
+            <form method="dialog">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-2.5 rounded-lg font-medium transition-colors">Close</button>
+            </form>
+        </div>
+    `;
+    modal.showModal();
+};
+
+loadIssues();
