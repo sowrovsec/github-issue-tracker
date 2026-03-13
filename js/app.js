@@ -47,3 +47,17 @@ const renderIssues = issues => {
         issuesContainer.appendChild(card);
     });
 };
+
+// Tabs Filter toggle  functionalities
+tabs.forEach(btn => btn.onclick = () => {
+    tabs.forEach(t => {
+        t.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        t.classList.add('bg-white', 'text-gray-700', 'shadow-sm', 'hover:bg-blue-50');
+    });
+
+    btn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+    btn.classList.remove('bg-white', 'text-gray-700', 'shadow-sm', 'hover:bg-blue-50');
+
+    const status = btn.dataset.status.toLowerCase();
+    renderIssues(status === 'all' ? allIssues : allIssues.filter(i => i.status.toLowerCase() === status));
+});
