@@ -131,6 +131,7 @@ document.getElementById('searchBtn').onclick = async () => {
     const searvalue = document.getElementById('searchInput').value;
     
     if (!searvalue) {
+        showloading(false)
         renderIssues(allIssues);
         return;
     }
@@ -139,8 +140,9 @@ document.getElementById('searchBtn').onclick = async () => {
 
     const res = await fetch(`${API}/issues/search?q=${searvalue}`);
     const data = await res.json();
+    showloading(false)
     renderIssues(data.data);
-            showloading(false)
+     
 
 
 };
