@@ -149,3 +149,10 @@ document.getElementById('searchBtn').onclick = async () => {
 
 
 loadIssues();
+
+// Logout when logout btn clicked to login page 
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    window.location.href = 'index.html';
+    
+    
+});
