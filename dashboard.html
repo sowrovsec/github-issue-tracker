@@ -9,9 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-white min-h-screen">
-    <!-- nav section -->
-         <div class="navbar bg-white-100 shadow-sm px-8">
+<body class="bg-white min-h-screen font-sans">
+
+    <div class="navbar bg-white-100 shadow-sm px-8">
         <div class="flex-1">
             <a class="text-xl text-blue-900 font-bold flex items-center gap-2">
                 <img src="/assets/github-logo.png" alt="GitHub" class="w-8 h-8 object-contain">
@@ -29,5 +29,24 @@
             <button id="logoutBtn" class="btn btn-ghost">Logout</button>
         </div>
     </div>
+
+    <main class="p-8 max-w-7xl mx-auto">
+
+        <!-- tab button section  -->
+        <div class="flex rounded-lg shadow-md items-center overflow-hidden w-full gap-2 h-20 px-8 mb-2"
+            id="tabs-container">
+            <button class="tab-btn btn btn-primary px-8  " data-status="All">All</button>
+            <button class="tab-btn btn btn-outline btn-primary px-8" data-status="open">Open</button>
+            <button class="tab-btn btn btn-outline btn-primary px-8" data-status="closed">Closed</button>
+        </div>
+
+
+       
+         
+    </main>
+
+   
+    <script src="app.js"></script>
 </body>
+
 </html>
