@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard - Issues Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>from dashboard page</h1>
+
+<body class="bg-white min-h-screen">
+    <!-- nav section -->
+         <div class="navbar bg-white-100 shadow-sm px-8">
+        <div class="flex-1">
+            <a class="text-xl text-blue-900 font-bold flex items-center gap-2">
+                <img src="/assets/github-logo.png" alt="GitHub" class="w-8 h-8 object-contain">
+                 <p class="hidden md:block">GitHub Issues Tracker</p>
+               
+            </a>
+            
+        </div>
+        <div class="flex-none gap-2 shadow-sm">
+            <div class="form-control flex-row gap-2">
+                <input type="text" id="searchInput" placeholder="Search..."
+                    class="input input-bordered bg-white w-24 md:w-auto" />
+                <button id="searchBtn" class="btn btn-outline">Search</button>
+            </div>
+            <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+        </div>
+    </div>
 </body>
 </html>
